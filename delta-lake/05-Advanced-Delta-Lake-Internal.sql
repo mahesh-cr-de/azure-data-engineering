@@ -1,0 +1,110 @@
+-- Databricks notebook source
+-- MAGIC %md-sandbox
+-- MAGIC
+-- MAGIC # Delta Lake internals
+-- MAGIC <img src="https://pages.databricks.com/rs/094-YMS-629/images/delta-lake-logo-whitebackground.png" style="width:200px; float: right"/>
+-- MAGIC
+-- MAGIC Let's deep dive into Delta Lake internals.
+-- MAGIC
+-- MAGIC ## Exploring delta structure
+-- MAGIC
+-- MAGIC Under the hood, Delta is composed of parquet files and a transactional log. Transactional log contains all the metadata operation. Databricks leverage this information to perform efficient data skipping at scale among other things.
+-- MAGIC
+-- MAGIC <!-- Collect usage data (view). Remove it to disable collection. View README for more details.  -->
+-- MAGIC <img width="1px" src="https://ppxrzfxige.execute-api.us-west-2.amazonaws.com/v1/analytics?category=data-engineering&org_id=1172988813503077&notebook=%2F05-Advanced-Delta-Lake-Internal&demo_name=delta-lake&event=VIEW&path=%2F_dbdemos%2Fdata-engineering%2Fdelta-lake%2F05-Advanced-Delta-Lake-Internal&version=1">
+-- MAGIC <!-- [metadata={"description":"Quick introduction to Delta Lake. <br/><i>Use this content for quick Delta demo.</i>",
+-- MAGIC  "authors":["quentin.ambard@databricks.com"],
+-- MAGIC  "db_resources":{}}] -->
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Init the demo data
+-- MAGIC %run ./_resources/00-setup $reset_all_data=false
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ### Exploring delta structure
+-- MAGIC
+-- MAGIC Delta is composed of parquet files and a transactional log
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC spark.table('user_delta').write.mode('overwrite').save(f'/Volumes/{catalog}/{schema}/{volume_name}/user_delta_table')
+
+-- COMMAND ----------
+
+
+DESCRIBE DETAIL `delta`.`/Volumes/main/dbdemos_delta_lake/delta_lake_raw_data/user_delta_table`
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Delta is composed of parquet files
+-- MAGIC %python
+-- MAGIC delta_folder = spark.sql(f"DESCRIBE DETAIL `delta`.`/Volumes/{catalog}/{schema}/{volume_name}/user_delta_table`").collect()[0]['location']
+-- MAGIC print(delta_folder)
+-- MAGIC display(dbutils.fs.ls(delta_folder))
+
+-- COMMAND ----------
+
+-- DBTITLE 1,And a transactional log
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls(delta_folder+"/_delta_log"))
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC commit_log = dbutils.fs.head(delta_folder+"/_delta_log/00000000000000000000.json", 10000)
+-- MAGIC print(json.dumps(json.loads(commit_log.split('\n')[0]), indent = 2))
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Unpacking the transaction log
+-- MAGIC The transaction log is key to understanding Delta Lake because it is the common
+-- MAGIC thread that runs through many of its most important features, including ACID transactions, scalable metadata handling, time travel and more. The Delta Lake transaction log is an ordered record of every transaction that has ever been performed on
+-- MAGIC a Delta Lake table since its inception.
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## OPTIMIZE in action
+-- MAGIC Running an `OPTIMIZE` + `VACUUM` will re-order all our files.
+-- MAGIC
+-- MAGIC As you can see, we have multiple small parquet files in our folder:
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls(delta_folder))
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC Let's OPTIMIZE our table to see how the engine will compact the table:
+
+-- COMMAND ----------
+
+OPTIMIZE `delta`.`/Volumes/main/dbdemos_delta_lake/delta_lake_raw_data/user_delta_table`;
+-- as we vacuum with 0 hours, we need to remove the safety check:
+
+-- Note: commented out as this option isn't available on serverless compute for now - see ES-1302674
+-- set spark.databricks.delta.retentionDurationCheck.enabled = false;
+
+-- VACUUM `delta`.`/Volumes/main/dbdemos_delta_lake/delta_lake_raw_data/user_delta_table` retain 0 hours;
+
+-- COMMAND ----------
+
+-- DBTITLE 1,Only one parquet file remains after the OPTIMIZE+VACUUM operation
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls(delta_folder))
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC That's it! You know everything about Delta Lake!
+-- MAGIC
+-- MAGIC As next step, you learn more about Spark Declarative Pipelines to simplify your ingestion pipeline: `dbdemos.install('pipeline-bike')`
+-- MAGIC
+-- MAGIC Go back to [00-Delta-Lake-Introduction]($./00-Delta-Lake-Introduction).
