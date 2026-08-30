@@ -29,11 +29,11 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 ### Level 2 — Intermediate (Core Engineering Skills)
 
 - [x] 06. [Apache Spark Core — RDDs, DataFrames, Catalyst & Tungsten](02-intermediate/06-spark-core/)
-- [ ] 07. PySpark Transformations, Joins & Partitioning Strategy
-- [ ] 08. Delta Lake Advanced — Time Travel, MERGE, OPTIMIZE, VACUUM, Z-Ordering
-- [ ] 09. Structured Streaming & Auto Loader
-- [ ] 10. Databricks Workflows & Job Orchestration
-- [ ] 11. Unity Catalog & Data Governance
+- [x] 07. [PySpark Transformations, Joins & Partitioning Strategy](02-intermediate/07-pyspark-transformations/)
+- [x] 08. [Delta Lake Advanced — Time Travel, MERGE, OPTIMIZE, VACUUM, Z-Ordering](02-intermediate/08-delta-lake-advanced/)
+- [x] 09. [Structured Streaming & Auto Loader](02-intermediate/09-structured-streaming-autoloader/)
+- [x] 10. [Databricks Workflows & Job Orchestration](02-intermediate/10-workflows-orchestration/)
+- [x] 11. [Unity Catalog & Data Governance](02-intermediate/11-unity-catalog-governance/)
 - [ ] 12. Databricks SQL & SQL Warehouses
 - [ ] 13. Performance Tuning — Shuffle, Skew, Caching, AQE, Spill
 
@@ -59,4 +59,4 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 
 ## Progress
 
-**6 / 25 topics complete.** Next up: *PySpark Transformations, Joins & Partitioning Strategy* and *Delta Lake Advanced*.
+**11 / 25 topics complete.** Next up: *Databricks SQL & SQL Warehouses* and *Performance Tuning — Shuffle, Skew, Caching, AQE, Spill*.
