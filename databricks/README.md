@@ -34,12 +34,12 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 - [x] 09. [Structured Streaming & Auto Loader](02-intermediate/09-structured-streaming-autoloader/)
 - [x] 10. [Databricks Workflows & Job Orchestration](02-intermediate/10-workflows-orchestration/)
 - [x] 11. [Unity Catalog & Data Governance](02-intermediate/11-unity-catalog-governance/)
-- [ ] 12. Databricks SQL & SQL Warehouses
-- [ ] 13. Performance Tuning — Shuffle, Skew, Caching, AQE, Spill
+- [x] 12. [Databricks SQL & SQL Warehouses](02-intermediate/12-databricks-sql-warehouses/)
+- [x] 13. [Performance Tuning — Shuffle, Skew, Caching, AQE, Spill](02-intermediate/13-performance-tuning/)
 
 ### Level 3 — Advanced (Platform & Architecture)
 
-- [ ] 14. Azure Ecosystem Integration — ADF, Key Vault, ADLS Gen2, Event Hub
+- [x] 14. [Azure Ecosystem Integration — ADF, Key Vault, ADLS Gen2, Event Hub](03-advanced/14-azure-ecosystem-integration/)
 - [ ] 15. CI/CD for Databricks — Repos, Databricks Asset Bundles, Terraform
 - [ ] 16. Medallion Architecture Design Patterns (Bronze/Silver/Gold)
 - [ ] 17. Lakehouse Data Modeling — SCD Types, Dimensional Design on Delta
@@ -59,4 +59,4 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 
 ## Progress
 
-**11 / 25 topics complete.** Next up: *Databricks SQL & SQL Warehouses* and *Performance Tuning — Shuffle, Skew, Caching, AQE, Spill*.
+**14 / 25 topics complete.** Next up: *CI/CD for Databricks — Repos, Databricks Asset Bundles, Terraform* and *Medallion Architecture Design Patterns (Bronze/Silver/Gold)*.
