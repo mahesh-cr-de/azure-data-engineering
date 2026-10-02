@@ -35,3 +35,4 @@ azure-ai-interview-prep/
 | 04 | [Streaming Event Hubs to Delta with exactly-once guarantees](questions/04-streaming-event-hubs-delta-exactly-once/question.md) | Event Hubs, Structured Streaming, watermarking, MERGE, DLQ |
 | 05 | [Data quality and observability framework](questions/05-data-quality-observability-framework/question.md) | DQ expectations, SLOs, lineage, data contracts, incident process |
 | 06 | [Cutting Databricks cost by 30% without breaking SLAs](questions/06-databricks-cost-optimization-finops/question.md) | FinOps, cluster policies, job clusters, spot, chargeback |
+| 07 | [CI/CD for Azure Databricks](questions/07-cicd-databricks-asset-bundles-terraform/question.md) | Asset Bundles, Terraform, GitHub Actions, testing, promotion, rollback |
