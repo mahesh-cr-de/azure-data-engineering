@@ -40,8 +40,8 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 ### Level 3 — Advanced (Platform & Architecture)
 
 - [x] 14. [Azure Ecosystem Integration — ADF, Key Vault, ADLS Gen2, Event Hub](03-advanced/14-azure-ecosystem-integration/)
-- [ ] 15. CI/CD for Databricks — Repos, Databricks Asset Bundles, Terraform
-- [ ] 16. Medallion Architecture Design Patterns (Bronze/Silver/Gold)
+- [x] 15. [CI/CD for Databricks — Repos, Databricks Asset Bundles, Terraform](03-advanced/15-cicd-databricks/)
+- [x] 16. [Medallion Architecture Design Patterns (Bronze/Silver/Gold)](03-advanced/16-medallion-architecture-patterns/)
 - [ ] 17. Lakehouse Data Modeling — SCD Types, Dimensional Design on Delta
 - [ ] 18. Security & Networking — VNet Injection, Private Link, IAM, RBAC vs ACLs
 - [ ] 19. Cost Optimization & Cluster Right-Sizing Strategies
@@ -59,4 +59,4 @@ Topics are added two at a time, in curriculum order. Check off items below as th
 
 ## Progress
 
-**14 / 25 topics complete.** Next up: *CI/CD for Databricks — Repos, Databricks Asset Bundles, Terraform* and *Medallion Architecture Design Patterns (Bronze/Silver/Gold)*.
+**16 / 25 topics complete.** Next up: *Lakehouse Data Modeling — SCD Types, Dimensional Design on Delta* and *Security & Networking — VNet Injection, Private Link, IAM, RBAC vs ACLs*.
